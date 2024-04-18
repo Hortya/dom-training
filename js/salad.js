@@ -12,22 +12,28 @@ for(const ingredient of ingredients){
 ingredientCounter = 0;
 
 document.getElementById("salad-ingredients").addEventListener('click',(event)=>{
-    if(!event.target.classList.contains('button')) return
-    if(ingredientCounter >=5)return
+    if(ingredientCounter >=5)return;
+    moveInAndOut("salad-final", event);
     ingredientCounter++;
     document.getElementById('salad-count').innerHTML = ingredientCounter;
-    btn = document.createElement('li');
-    btn.innerHTML = event.target.parentNode.innerHTML;
-    document.getElementById('salad-final').appendChild(btn);
-    event.target.parentNode.remove();
 }) 
 
 document.getElementById("salad-final").addEventListener('click', (event)=>{
-    if(!event.target.classList.contains('button')) return;
+    moveInAndOut("salad-ingredients", event);
     ingredientCounter--;
     document.getElementById('salad-count').innerHTML = ingredientCounter;
+})
+
+
+/**
+ * move the element to an ohter 'out' element
+ * @param {string} out the location where you want the element to move in
+ * @param {envent} event the event
+ */
+function moveInAndOut(out, event){
+    if(!event.target.classList.contains('button')) return;
     btn = document.createElement('li');
     btn.innerHTML = event.target.parentNode.innerHTML;
-    document.getElementById('salad-ingredients').appendChild(btn);
+    document.getElementById(out).appendChild(btn);
     event.target.parentNode.remove();
-})
+}
