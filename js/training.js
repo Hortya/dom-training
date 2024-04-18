@@ -18,6 +18,7 @@ document.querySelector('#btnEx3').addEventListener('click', function (event) {
     animals.firstElementChild.remove;
 })
 
+
 /* ------------------------------------ */
 /* --- Exercice 4 --- */
 let iEx4 = 0;
@@ -57,18 +58,15 @@ for (const btn of ex5Btns) {
 
 /* ------------------------------------ */
 /* --- Exercice 6 --- */
-console.log(
-    document.querySelector('#ex6-paragraph').outerText
-);
+const txtEx6 = document.querySelector('#ex6-paragraph').outerText.toString()
 
-const txtEx6 = document.querySelector('#ex6-paragraph').outerText
-
-// document.querySelector('#ex6-paragraph').innerText = ''
-// for (letter of txtEx6) {
-//    setInterval(() => {
-//         document.querySelector('#ex6-paragraph').innerText += letter
-//     }, 5000);
-// }
+document.querySelector('#ex6-paragraph').innerText = ''
+let j = 0;
+const ex6 = setInterval(() => {
+    document.querySelector('#ex6-paragraph').innerHTML += txtEx6[j];
+    j++;
+    if (j >= txtEx6.length) clearInterval(ex6);
+}, 50);
 
 
 /* ------------------------------------ */
@@ -83,6 +81,39 @@ const taskList = [
     "🌳 Tondre la pelouse"
 ];
 
+function ex7list(e){
+    if(e.target.classList.contains('button')){
+        if(taskList.length <= 0) return;
+        const newList = document.createElement('li');
+        newList.classList.add('task-list-task');
+        newList.innerText = taskList.shift();
+        document.getElementById('ex7-list').appendChild(newList)
+        return
+    }
+    if(e.target.classList.contains('task-list-task')){
+        taskList.push(e.target.innerText);
+        e.target.remove();
+    }
+}
+
+document.getElementById('ex7').addEventListener('click', (event) => ex7list(event) )
 
 /* ------------------------------------ */
 /* --- Exercice 8 --- */
+
+function ex8Points(event){
+    if(!event.target.classList.contains('button')) return;
+    point = parseInt(event.target.dataset.score) - 5;
+    if (point > 0){
+        event.target.setAttribute('data-score', point);
+    }else  event.target.setAttribute('data-score', 0);
+
+    const prog = event.target.dataset.progressId
+    document.getElementById(prog).style.width = event.target.dataset.score + '%';
+}
+
+
+
+document.querySelector('#ex8div').addEventListener('click', (event) => ex8Points(event))
+
+

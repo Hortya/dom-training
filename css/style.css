@@ -11,3 +11,9 @@
 .green{
     background-color: green;
 }
+
+.active{
+    background-color: #FFF;
+    display: block;
+    z-index: 1000;
+}
